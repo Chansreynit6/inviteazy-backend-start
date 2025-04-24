@@ -4,9 +4,14 @@ export const connectPostgresDb = (): Pool => {
   const pool = new Pool({
     user: "sreynit",
     host: "localhost",
-    database: "invitation",
-    password: "123456",
-    port: 5441,
+ 5441,
+
+    database: "mydb",
+    password: "postgres",
+    port: 5439,
+
   });
   return pool;
 };
+
+

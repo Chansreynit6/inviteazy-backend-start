@@ -4,11 +4,13 @@ exports.connectPostgresDb = void 0;
 const pg_1 = require("pg");
 const connectPostgresDb = () => {
     const pool = new pg_1.Pool({
-        user: "sreynit",
+
+        user: "postgres",
         host: "localhost",
-        database: "invitation",
-        password: "123456",
-        port: 5441,
+        database: "mydb",
+        password: "postgres",
+        port: 5439,
+
     });
     return pool;
 };

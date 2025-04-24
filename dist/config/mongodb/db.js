@@ -17,6 +17,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const connectMongoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const URI = "mongodb://localhost:27017/";
+
+        const URI = "mongodb://localhost:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2";
+
         const connOptions = {
             useNewUrlParser: true,
             useUnifiedTopology: true,
