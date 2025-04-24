@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const connectMongoDB = async () => {
   try {
-    const URI = "mongodb://localhost:27017/";
+    const URI = "mongodb://localhost:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2";
     const connOptions = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -18,3 +18,5 @@ export const connectMongoDB = async () => {
     process.exit(1);
   }
 };
+
+
