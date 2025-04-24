@@ -101,10 +101,14 @@ async inviteUserToEvent(req: Request, res: Response, next: NextFunction): Promis
   // Update invitee status
   async updateStatus(req: Request, res: Response, next: NextFunction) {
     try {
-      const { inviteId } = req.params;
+      const { id } = req.params;
       const { status } = req.body;
 
-      const updated = await this.inviteeService.updateStatus(inviteId, status);
+      console.log(id,"==============");
+      console.log(status, "======================");
+      
+
+      const updated = await this.inviteeService.updateStatus(id, status);
       res.json({ message: "Invitee status updated", data: updated });
     } catch (error) {
       next(error);

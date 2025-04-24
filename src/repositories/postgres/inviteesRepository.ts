@@ -11,10 +11,7 @@ export class PostgresInviteeRepository implements IInviteeRepository {
   createInvitee(invitee: Omit<IInvitee, "id" | "created_at">): Promise<IInvitee> {
     throw new Error("Method not implemented.");
   }
-    updateStatus(inviteId: string, status: string): IInvitee | PromiseLike<IInvitee> {
-        throw new Error("Method not implemented.");
-    }
-
+  
   async findAll(): Promise<IInvitee[]> {
     const { rows } = await queryWithLogging(
       this.pool,
@@ -51,4 +48,22 @@ export class PostgresInviteeRepository implements IInviteeRepository {
     );
     return rows[0];
   }
+
+  async updateStatus(inviteId: string, status: string): Promise<IInvitee> {
+    const { rows } = await queryWithLogging(
+      this.pool,
+      `UPDATE invitees 
+       SET status = $1 
+       WHERE id = $2 
+       RETURNING id, event_id, user_id, status, qr_code, is_checked_in, checked_in_at, created_at`,
+      [status, inviteId]
+    );
+  
+    if (rows.length === 0) {
+      throw Object.assign(new Error("Invitee not found"), { status: 404 });
+    }
+  
+    return rows[0];
+  }
+  
 }
