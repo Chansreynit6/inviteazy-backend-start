@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loggingMiddleware = loggingMiddleware;
 const loggerService_1 = require("../services/loggerService");
+
 function loggingMiddleware(req, res, next) {
     const startTime = Date.now();
     const requestLog = {
@@ -22,5 +23,6 @@ function loggingMiddleware(req, res, next) {
         loggerService_1.logger.info("Response sent", responseLog);
         return originalSend.call(this, body);
     };
+
     next();
 }

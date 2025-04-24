@@ -40,6 +40,7 @@ class UserService {
                 throw Object.assign(new Error("User already exists"), { status: 400 });
             }
             const newUser = yield this.userRepository.create(user);
+
             const token = jsonwebtoken_1.default.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
             return { user: newUser, token };
         });

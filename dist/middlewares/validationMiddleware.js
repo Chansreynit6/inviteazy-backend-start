@@ -1,12 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+
 exports.validateInviteUsers = exports.validateInvitee = exports.inviteUserSchema = exports.inviteeSchema = exports.validateStatus = exports.validateEvent = exports.validateIdInURLParam = exports.validateLogin = exports.validateUser = void 0;
+
 const zod_1 = require("zod");
 const userSchema = zod_1.z.object({
     name: zod_1.z.string().min(3),
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(8),
+
     role: zod_1.z.enum(["admin", "public", "user"]),
+
 });
 const loginSchema = zod_1.z.object({
     email: zod_1.z.string().email(),
@@ -57,6 +61,7 @@ const validateIdInURLParam = (req, res, next) => {
     }
 };
 exports.validateIdInURLParam = validateIdInURLParam;
+
 const eventSchema = zod_1.z.object({
     user_id: zod_1.z.string().uuid(),
     event_name: zod_1.z.string().min(3, "Event name is required"),
@@ -137,3 +142,4 @@ const validateInviteUsers = (req, res, next) => {
     }
 };
 exports.validateInviteUsers = validateInviteUsers;
+

@@ -29,13 +29,16 @@ export class UserService implements IUserService {
     }
 
     const newUser = await this.userRepository.create(user);
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
     const token = jwt.sign(
       { id: newUser.id },
       process.env.JWT_SECRET as string,
+      
       { expiresIn: "1h" }
     );
     return { user: newUser, token };
+    
   }
 
   async login(email: string, password: string) {

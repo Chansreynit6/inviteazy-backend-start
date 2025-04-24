@@ -12,6 +12,8 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sanitizeRequestData = sanitizeRequestData;
+
+
 const sensitiveFields = ["username", "password", "email", "token"];
 function sanitizeRequestData(req) {
     const safeData = {
@@ -33,3 +35,15 @@ function sanitizeRequestData(req) {
     }
     return safeData;
 }
+
+function maskSensitiveData(body) {
+    const masked = Object.assign({}, body);
+    const sensitiveFields = ["name", "password", "email", "role",];
+    for (const field of sensitiveFields) {
+        if (masked[field])
+            masked[field] = "*****";
+    }
+    return masked;
+}
+
+

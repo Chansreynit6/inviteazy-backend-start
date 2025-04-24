@@ -13,7 +13,9 @@ const redis_1 = require("redis");
 class RedisCacheService {
     constructor() {
         this.client = (0, redis_1.createClient)({
+
             url: process.env.REDIS_URL || "redis://localhost:6389",
+
             socket: {
                 reconnectStrategy: (retries) => Math.min(retries * 50, 1000),
             },
