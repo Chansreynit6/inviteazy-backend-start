@@ -18,12 +18,10 @@ export default function inviteRoutes(controller: InviteeController): Router {
     controller.inviteUserToEvent.bind(controller)
   );
   
-  
   router.patch(
-    "/status/:id",
+    "/:id",
     authMiddleware,
     validateIdInURLParam,
-    validateStatus,
     controller.updateStatus.bind(controller)
   );
 
