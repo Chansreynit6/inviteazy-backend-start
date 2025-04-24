@@ -59,6 +59,30 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+#EVENTS table
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
+    event_name TEXT NOT NULL,
+    event_datetime TIMESTAMPTZ NOT NULL,
+    location TEXT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+#INVITEES table
+CREATE TABLE invitees (
+    id SERIAL PRIMARY KEY,
+    event_id INTEGER REFERENCES events(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    status TEXT CHECK (status IN ('pending', 'accept', 'maybe', 'no', 'busy')) DEFAULT 'pending',
+    qr_code TEXT,
+    is_checked_in BOOLEAN DEFAULT FALSE,
+    checked_in_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 # Show the table structures
 \d users
 
