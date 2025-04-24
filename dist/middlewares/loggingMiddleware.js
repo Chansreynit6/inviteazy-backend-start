@@ -1,15 +1,15 @@
-import { Request, Response, NextFunction } from "express";
-import { logger } from "../services/loggerService";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.loggingMiddleware = loggingMiddleware;
+const loggerService_1 = require("../services/loggerService");
 // import { sanitizeRequestData } from "../utils/sanitizeRequestData";
-import { maskSensitiveData } from "../utils/sanitizeRequestData";
-
+const sanitizeRequestData_1 = require("../utils/sanitizeRequestData");
 // export function loggingMiddleware(
 //   req: Request,
 //   res: Response,
 //   next: NextFunction
 // ) {
 //   const startTime = Date.now();
-
 //   const requestLog = {
 //     method: req.method,
 //     url: req.url,
@@ -17,7 +17,6 @@ import { maskSensitiveData } from "../utils/sanitizeRequestData";
 //     body: req.body,
 //   };
 //   logger.info("Request received", requestLog);
-
 //   const originalSend = res.send;
 //   res.send = function (body) {
 //     const duration = Date.now() - startTime;
@@ -29,20 +28,15 @@ import { maskSensitiveData } from "../utils/sanitizeRequestData";
 //     logger.info("Response sent", responseLog);
 //     return originalSend.call(this, body);
 //   };
-
 //   next();
-
-  
 // }
-export function loggingMiddleware(req: Request, res: Response, next: NextFunction) {
-  const { method, url, headers, body } = req;
-
-  logger.info("Request received", {
-    method,
-    url,
-    headers,
-    body: maskSensitiveData(body),
-  });
-
-  next();
+function loggingMiddleware(req, res, next) {
+    const { method, url, headers, body } = req;
+    loggerService_1.logger.info("Request received", {
+        method,
+        url,
+        headers,
+        body: (0, sanitizeRequestData_1.maskSensitiveData)(body),
+    });
+    next();
 }

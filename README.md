@@ -58,6 +58,17 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+# event
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    user_id SERIAL REFERENCES users(id) ON DELETE CASCADE,
+    event_name TEXT NOT NULL,
+    event_datetime TIMESTAMPTZ NOT NULL,
+    location TEXT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
 
 # Show the table structures
 \d users

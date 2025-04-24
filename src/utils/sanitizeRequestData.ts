@@ -23,4 +23,16 @@ export function sanitizeRequestData(req: Request): Record<string, any> {
   }
 
   return safeData;
+
+  
+}
+export function maskSensitiveData(body: Record<string, any>): Record<string, any> {
+  const masked = { ...body };
+
+  const sensitiveFields = ["name", "password", "email", "role",];
+  for (const field of sensitiveFields) {
+    if (masked[field]) masked[field] = "*****";
+  }
+
+  return masked;
 }

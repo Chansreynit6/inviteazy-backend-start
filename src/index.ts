@@ -5,10 +5,13 @@ import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { UserService } from "./services/userService";
 import { UserController } from "./controllers/userController";
 import { AuthController } from "./controllers/authController";
+
 import authRoutes from "./routes/authRoutes";
 import { connectPostgresDb } from "./config/postgresdb/db";
 import { PostgresUserRepository } from "./repositories/postgres/userRepository";
 import { loggingMiddleware } from "./middlewares/loggingMiddleware";
+// import { EventService } from "./services/eventService";
+// import { PostgresEventRepository } from "./repositories/postgres/eventRepository";
 
 dotenv.config();
 
@@ -22,13 +25,20 @@ const pgPool = connectPostgresDb();
 // Repositories
 // const userRepository = new MongoUserRepository();
 const userRepository = new PostgresUserRepository(pgPool);
+// const eventRepository = new PostgresEventRepository(pgPool);
 
 // Services
 const userService = new UserService(userRepository);
+// const eventService = new EventService(eventRepository);
 
 // Controllers
 const userController = new UserController(userService);
 const authController = new AuthController(userService);
+// const eventController = new EventController(eventService);
+
+
+
+
 
 // Middlewares
 app.use(express.json());
@@ -37,6 +47,7 @@ app.use(loggingMiddleware);
 // Routes
 app.use("/api/users", userRoutes(userController));
 app.use("/api/auth", authRoutes(authController));
+
 
 // Handle Errors
 app.use(errorMiddleware);
