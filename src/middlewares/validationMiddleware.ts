@@ -70,7 +70,7 @@ export const validateIdInURLParam = (
 
 
 const eventSchema = z.object({
-  user_id: z.string().uuid(),
+  user_id: z.string(),
   event_name: z.string().min(3, "Event name is required"),
   event_datetime: z
     .string()
