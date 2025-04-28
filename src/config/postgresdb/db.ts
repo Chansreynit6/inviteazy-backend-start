@@ -1,17 +1,17 @@
 import { Pool } from "pg";
+import { env } from "process";
 
 export const connectPostgresDb = (): Pool => {
   const pool = new Pool({
-    user: "sreynit",
-    host: "localhost",
- 5441,
-
-    database: "mydb",
-    password: "postgres",
-    port: 5439,
-
+    user: env.POSTGRES_USER ,
+    host: env.POSTGRES_HOST,
+    database: env.POSTGRES_DB,
+    password: env.POSTGRES_PASSWORD,
+    port: parseInt(env.POSTGRES_PORT || "5432"),
+    // port: env.POSTGRES_PORT,
+    // database: "invatation",
+    // password: "123456",
+    // port: 5432,
   });
   return pool;
 };
-
-

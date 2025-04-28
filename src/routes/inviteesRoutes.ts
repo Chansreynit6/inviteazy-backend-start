@@ -13,6 +13,7 @@ export default function inviteRoutes(controller: InviteeController): Router {
 
   router.get("/", authMiddleware, controller.getAllInvitees.bind(controller));
 
+  controller.inviteUserToEvent.bind(controller)
   router.post(
     "/events/:eventId/invite",
     controller.inviteUserToEvent.bind(controller)
@@ -23,6 +24,11 @@ export default function inviteRoutes(controller: InviteeController): Router {
     authMiddleware,
     validateIdInURLParam,
     controller.updateStatus.bind(controller)
+  );
+  router.get(
+    "/event/:event_id/status",
+    authMiddleware,
+    controller.getGuestInsights.bind(controller)
   );
 
   return router;
