@@ -21,6 +21,11 @@ export class PostgresInviteeRepository implements IInviteeRepository {
     return rows;
   }
 
+  async findByEventId(event_id: string): Promise<IInvitee[]> {
+    const { rows } = await queryWithLogging(this.pool, "SELECT * FROM invitees WHERE event_id = $1", [event_id]);
+    return rows;
+}
+
   async findById(id: string): Promise<IInvitee | null> {
     const { rows } = await queryWithLogging(
       this.pool,

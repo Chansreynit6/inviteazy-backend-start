@@ -1,4 +1,5 @@
 export interface IInvitee {
+    contribution: any;
     id?: string;
     event_id?: string;
     user_id: string;
@@ -13,6 +14,7 @@ export interface IInvitee {
   
   export interface IInviteeRepository {
     create(newInvitee: IInviteeWithoutId): IInvitee | PromiseLike<IInvitee>;
+    findByEventId(event_id: string): unknown;
     updateStatus(inviteId: string, status: string): IInvitee | PromiseLike<IInvitee>;
     findAll(): Promise<IInvitee[]>;
     findById(id: string): Promise<IInvitee | null>;
@@ -20,6 +22,7 @@ export interface IInvitee {
   }
   
   export interface IInviteeService {
+    findByEventId(event_id: string): unknown;
     updateStatus(inviteId: string, status: any): unknown;
     updateInvitationStatus(inviteId: string, status: any): unknown;
     getUserInvitations(userId: any): unknown;

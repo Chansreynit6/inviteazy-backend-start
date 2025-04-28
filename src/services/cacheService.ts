@@ -6,7 +6,7 @@ class RedisCacheService {
 
   private constructor() {
     this.client = createClient({
-      url: process.env.REDIS_URL || "redis://localhost:6389",
+      url: process.env.REDIS_URL || "redis://localhost:6380",
       socket: {
         reconnectStrategy: (retries) => Math.min(retries * 50, 1000),
       },
