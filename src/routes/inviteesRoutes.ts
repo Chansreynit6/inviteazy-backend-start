@@ -30,6 +30,8 @@ export default function inviteRoutes(controller: InviteeController): Router {
     authMiddleware,
     controller.getGuestInsights.bind(controller)
   );
+  router.patch('/checkin/:event_id/:user_id', authMiddleware, controller.checkin.bind(controller));
+  router.patch('/checkout/:event_id/:user_id', authMiddleware, controller.checkout.bind(controller));
 
   return router;
 }
