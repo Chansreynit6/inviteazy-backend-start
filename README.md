@@ -94,6 +94,12 @@ CREATE TABLE invitees (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+#add checkout_at
+ALTER TABLE invitees
+ADD COLUMN checked_out_at TIMESTAMP,
+ADD COLUMN contribution_amount NUMERIC(10,2);
+
+
 # Show the table structures
 \d users
 

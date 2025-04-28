@@ -5,8 +5,8 @@ export interface IInvitee {
     status?: 'pending' | 'accept' | 'maybe' | 'no' | 'busy';
     qr_code?: string;
     is_checked_in?: boolean;
-    checked_in_at?: string; // ISO string or can use Date
-    created_at?: string;    // Optional: if you want to expose this
+    checked_in_at?: string; 
+    created_at?: string;
   }
   
   export interface IInviteeWithoutId extends Omit<IInvitee, 'id'> {}
